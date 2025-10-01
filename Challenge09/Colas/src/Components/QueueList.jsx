@@ -1,4 +1,4 @@
-export default function QueueList({ items }) {
+export default function QueueList({ items, fmt }) {
   if (!items.length) return <p>No hay personas en la cola.</p>
 
   return (
@@ -7,8 +7,9 @@ export default function QueueList({ items }) {
       <ol className="list">
         {items.map((p, i) => (
           <li key={p.id ?? `${p.name}-${i}`}>
-            <strong>{p.name}</strong> — ${p.amount}{' '}
-            {i === 0 && <em>(Primero)</em>}
+            <strong>Turno #{p.turn}</strong> — {p.name} — ${p.amount}
+            {p.time && <> — tomado: {fmt(p.time)}</>}
+            {i === 0 && <em> (front)</em>}
           </li>
         ))}
       </ol>
