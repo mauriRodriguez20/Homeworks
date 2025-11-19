@@ -1,0 +1,152 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #ffffff;
+  color: #1f2933;
+}
+
+.app-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+.panel {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #ffffff;
+}
+
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #fafafa;
+}
+
+input,
+select {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #1f2933;
+}
+
+button {
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.city-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.city-list li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.city-btn {
+  flex: 1;
+  text-align: left;
+  background: #e5e7eb;
+  color: #111827;
+  border: 1px solid #cbd5e1;
+}
+
+.city-btn.selected {
+  background: #bfdbfe;
+}
+
+.delete-btn {
+  background: #ef4444;
+  border-color: #ef4444;
+}
+
+.connection-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.zones-tree {
+  list-style: none;
+  padding-left: 10px;
+  margin: 0;
+}
+
+.zones-tree ul {
+  list-style: none;
+  padding-left: 12px;
+  margin: 0;
+}
+
+.subtle {
+  margin: 0 0 4px 0;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+.graph-canvas {
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.graph-node {
+  cursor: pointer;
+}
+
+.graph-node circle {
+  fill: #ffffff;
+  stroke: #111827;
+  stroke-width: 2;
+}
+
+.graph-node text {
+  fill: #111827;
+  font-weight: 700;
+}
+
+.graph-node .node-subtext {
+  font-size: 0.75rem;
+  font-weight: 500;
+  fill: #111827;
+}
+
+.edge {
+  stroke: #9ca3af;
+  stroke-width: 2;
+}
