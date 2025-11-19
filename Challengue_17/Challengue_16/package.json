@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "react-d3-graph": "^2.6.0"
+  },
+  "devDependencies": {
+    "sass": "^1.94.1"
   }
 }

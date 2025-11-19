@@ -1,0 +1,92 @@
+@use "sass:map";
+
+$colors: (
+  "bg": #0a0f1c,
+  "surface": #0f1629,
+  "panel": #0b1324,
+  "text": #e6f3ff,
+  "muted": #8ea6c1,
+  "primary": #22d3ee, 
+  "secondary": #8b5cf6, 
+  "accent": #22f39a, 
+  "border": #1c2541,
+  "ok": #22f39a,
+  "error": #ff4d4f
+) !default;
+
+$font-stacks: (
+  "base": (
+    'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif
+  ),
+  "mono": (
+    'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace
+  )
+) !default;
+
+$space-scale: (
+  "xxs": 0.25rem,
+  "xs": 0.5rem,
+  "sm": 0.75rem,
+  "md": 1rem,
+  "lg": 1.5rem,
+  "xl": 2rem,
+  "xxl": 3rem
+) !default;
+
+$radius-scale: (
+  "sm": 0.5rem,
+  "md": 0.75rem,
+  "lg": 1rem,
+  "pill": 999px
+) !default;
+
+$elevations: (
+  "sm": 0 6px 14px rgba(0, 0, 0, 0.25),
+  "md": 0 12px 24px rgba(0, 0, 0, 0.35),
+  "glass": 0 20px 50px rgba(0, 0, 0, 0.45)
+) !default;
+
+$breakpoints: (
+  "sm": 480px,
+  "md": 768px,
+  "lg": 1024px
+) !default;
+
+$transition-speed: 0.28s !default;
+
+// Glow strength tokens
+$glow: (
+  "soft": 0 0 24px rgba(34, 211, 238, 0.25),
+  "strong": 0 0 48px rgba(139, 92, 246, 0.45)
+) !default;
+
+$button-variants: (
+  "primary": (
+    "bg": map.get($colors, "primary"),
+    "color": map.get($colors, "bg")
+  ),
+  "ghost": (
+    "bg": transparent,
+    "color": map.get($colors, "primary"),
+    "border": rgba(map.get($colors, "primary"), 0.6)
+  ),
+  "success": (
+    "bg": rgba(map.get($colors, "ok"), 0.16),
+    "color": map.get($colors, "ok")
+  )
+) !default;
+
+$badge-variants: (
+  "muted": (
+    "bg": rgba(map.get($colors, "border"), 0.5),
+    "color": map.get($colors, "muted")
+  ),
+  "info": (
+    "bg": rgba(map.get($colors, "secondary"), 0.18),
+    "color": map.get($colors, "secondary")
+  ),
+  "positive": (
+    "bg": rgba(map.get($colors, "ok"), 0.18),
+    "color": map.get($colors, "ok")
+  )
+) !default;
