@@ -1,0 +1,45 @@
+@use "sass:color";
+@use "sass:map";
+@use "sass:math";
+@use "./variables";
+
+@function space($step, $multiplier: 1) {
+  $value: map.get(variables.$space-scale, $step);
+  @if $value == null {
+    @error "Unknown spacing token `#{$step}`.";
+  }
+  @return $value * $multiplier;
+}
+
+@function radius($token: "md") {
+  $value: map.get(variables.$radius-scale, $token);
+  @if $value == null {
+    @error "Unknown radius token `#{$token}`.";
+  }
+  @return $value;
+}
+
+@function tone($color-name, $alpha: 1) {
+  $value: map.get(variables.$colors, $color-name);
+  @if $value == null {
+    @error "Unknown color token `#{$color-name}`.";
+  }
+  @return rgba($value, $alpha);
+}
+
+@function color-scale($color-name, $weight: 10%) {
+  $value: map.get(variables.$colors, $color-name);
+  @if $value == null {
+    @error "Unknown color token `#{$color-name}`.";
+  }
+  @if $weight >= 0 {
+    @return color.mix(white, $value, $weight);
+  }
+  @return color.mix(black, $value, math.abs($weight));
+}
+
+@function fluid-space($min-step: "sm", $max-step: "lg") {
+  $min: space($min-step);
+  $max: space($max-step);
+  @return clamp(#{$min}, calc(#{$min} + 1vw), #{$max});
+}

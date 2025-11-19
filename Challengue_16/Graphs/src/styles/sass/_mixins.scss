@@ -1,0 +1,106 @@
+@use "sass:map";
+@use "./functions" as fn;
+@use "./variables";
+
+@mixin elevation($level: "md") {
+  box-shadow: map.get(variables.$elevations, $level);
+}
+
+@mixin soft-transition($props: all) {
+  transition: $props variables.$transition-speed ease;
+}
+
+@mixin focus-ring($color: "primary") {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08), 0 0 0 4px fn.tone($color, 0.35);
+}
+
+@mixin glass-panel($blur: 18px, $alpha: 0.15) {
+  background: rgba(255, 255, 255, $alpha);
+  background: linear-gradient(145deg, rgba(255, 255, 255, $alpha), rgba(255, 255, 255, $alpha - 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+}
+
+@mixin button($variant: "primary") {
+  $options: map.get(variables.$button-variants, $variant);
+  $bg: map.get($options, "bg");
+  $color: map.get($options, "color");
+  $border: map.get($options, "border");
+
+  border: 1px solid if($border, $border, transparent);
+  background: $bg;
+  color: $color;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+
+  @include soft-transition(all);
+  @include elevation("sm");
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.35), transparent 65%);
+    opacity: 0;
+    @include soft-transition(opacity);
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+@mixin ripple($color: rgba(255, 255, 255, 0.45)) {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: $color;
+    opacity: 0.3;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  &:active::before {
+    animation: ripple 0.6s ease-out forwards;
+  }
+}
+
+@mixin input-base {
+  width: 100%;
+  border-radius: fn.radius("lg");
+  padding: fn.space("sm") fn.space("md");
+  border: 1px solid fn.tone("border", 0.8);
+  background: fn.tone("panel", 0.85);
+  color: fn.tone("text");
+  font-size: 0.95rem;
+  @include soft-transition(border-color);
+
+  &:focus-visible {
+    outline: none;
+    border-color: fn.tone("primary");
+    @include focus-ring("primary");
+  }
+
+  &::placeholder {
+    color: fn.tone("muted", 0.8);
+  }
+}
+
+@mixin respond-to($breakpoint) {
+  $size: map.get(variables.$breakpoints, $breakpoint);
+  @if $size {
+    @media (min-width: $size) {
+      @content;
+    }
+  }
+}

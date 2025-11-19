@@ -1,0 +1,185 @@
+@use "sass:map";
+@use "./functions" as fn;
+@use "./index" as *;
+
+%card-shell {
+  background: fn.tone("surface", 0.9);
+  border: 1px solid fn.tone("border", 0.8);
+  border-radius: fn.radius("lg");
+  padding: fn.space("lg");
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  @include elevation("md");
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 55%);
+    opacity: 0.8;
+    pointer-events: none;
+  }
+}
+
+.card {
+  @extend %card-shell;
+  display: flex;
+  flex-direction: column;
+  gap: fn.space("md");
+
+  &--soft {
+    background: fn.tone("panel", 0.9);
+    border-color: fn.tone("border", 0.6);
+  }
+
+  &--graph {
+    padding: fn.space("md");
+  }
+}
+
+.card__title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: fn.tone("text");
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: fn.space("sm");
+
+  &--between {
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.input {
+  flex: 1 1 220px;
+  @include input-base;
+}
+
+.input-group {
+  display: flex;
+  gap: fn.space("xs");
+  width: 100%;
+}
+
+.btn {
+  border-radius: fn.radius("lg");
+  padding: fn.space("sm") fn.space("lg");
+  font-size: 0.95rem;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  @include soft-transition(box-shadow);
+  @include ripple(rgba(255, 255, 255, 0.5));
+
+  &:disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+@each $variant, $options in $button-variants {
+  .btn--#{$variant} {
+    @include button($variant);
+  }
+}
+
+.muted {
+  color: fn.tone("muted");
+  font-size: 0.9rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.75rem;
+  border-radius: fn.radius("pill");
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid fn.tone("border", 0.6);
+}
+
+@each $variant, $values in $badge-variants {
+  .badge--#{$variant} {
+    background: map.get($values, "bg");
+    color: map.get($values, "color");
+    border-color: transparent;
+  }
+}
+
+.status {
+  &--ok { color: fn.tone("ok"); }
+  &--error { color: fn.tone("error"); }
+}
+
+.people-list {
+  display: grid;
+  gap: fn.space("sm");
+}
+
+.people-list__item {
+  padding: fn.space("sm") fn.space("md");
+  border-radius: fn.radius("md");
+  background: fn.tone("panel", 0.92);
+  border: 1px solid fn.tone("border", 0.6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include soft-transition(border-color);
+
+  &:hover {
+    border-color: fn.tone("primary");
+  }
+}
+
+.people-list__meta {
+  font-size: 0.85rem;
+  color: fn.tone("muted");
+}
+
+.graph-wrapper {
+  width: 100%;
+  min-height: 520px;
+  border-radius: fn.radius("lg");
+  border: 1px solid fn.tone("border");
+  background: linear-gradient(145deg, fn.tone("panel", 0.9), fn.tone("surface", 0.95));
+  overflow: hidden;
+  position: relative;
+  @include glass-panel(32px, 0.08);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 1rem;
+    border: 1px dashed rgba(255, 255, 255, 0.06);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+}
+
+.info-grid {
+  display: grid;
+  gap: fn.space("sm");
+
+  @include respond-to("md") {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
+.page-heading {
+  display: flex;
+  flex-direction: column;
+  gap: fn.space("xs");
+  padding-bottom: fn.space("sm");
+  border-bottom: 1px solid fn.tone("border", 0.5);
+
+  h1 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+  }
+}
